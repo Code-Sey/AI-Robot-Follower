@@ -4,7 +4,7 @@ from detector import Detector
 
 # uncomment real controller for demo, uncomment fake for testing
 # from controller import Controller
-from fake_contorller import FakeController
+from fake_controller import FakeController
 
 cam = Camera()
 detections = Detector()
@@ -14,11 +14,10 @@ controller = FakeController()
 selectedOwner = False
 ownerLostFrames = 0
 MAX_LOST_FRAMES = 10
-
-while cam.isRunning():
-#  Getting the Frame
-    try:
+try:
     
+    while cam.isRunning():
+    #  Getting the Frame
         working, frame, center_frame = cam.get_frame()
         if not working:
             break
@@ -58,13 +57,12 @@ while cam.isRunning():
         # cv.imshow("AI Follow Robot Vision", new_frame)
 
         if key == ord('d'):
-            controller.send_command("STOP")
             cam.release()
             break
-    finally:
-        controller.send_command("STOP")
-        cam.release()
-        cv.destroyAllWindows()
+finally:
+    controller.send_command("STOP")
+    cam.release()
+    cv.destroyAllWindows()
 
 
 
