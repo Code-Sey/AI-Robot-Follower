@@ -33,9 +33,9 @@ class Controller():
 
         if too_far:
             if off_center < -self.DEAD_ZONE:
-                self.send_command("FR")
-            elif off_center > self.DEAD_ZONE:
                 self.send_command("FL")
+            elif off_center > self.DEAD_ZONE:
+                self.send_command("FR")
             else:
                 self.send_command("F")
         else:

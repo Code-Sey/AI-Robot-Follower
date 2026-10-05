@@ -29,8 +29,7 @@ try:
 
     #  Selecting the owner
         if key == ord('w') and not selectedOwner:
-            detections.selectOwner(results, center_frame)
-            selectedOwner = True
+            selectedOwner = detections.selectOwner(results, center_frame)
     #  Deselcting Owner
         if key == ord('z') and selectedOwner:
             detections.deselectOwner()

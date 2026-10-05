@@ -21,9 +21,13 @@ class Detector():
                 if d < min_d:
                     min_d = d
                     closestToCenter = box
-            if closestToCenter is not None:
-                self.owner_id = int(closestToCenter.id.item())
-                print(f"Owner selected with ID: {self.owner_id}")
+            if closestToCenter is None:
+                print("No tracked person to select. Try again")
+                return False
+                
+            self.owner_id = int(closestToCenter.id.item())
+            print(f"Owner selected with ID: {self.owner_id}")
+            return True
 
 
     def deselectOwner(self):
