@@ -1,13 +1,18 @@
 import cv2 as cv
 from camera import Camera
 from detector import Detector
-from controller import Controller
+
+# uncomment real controller for demo, uncomment fake for testing
+# from controller import Controller
+from fake_contorller import FakeController
 
 cam = Camera()
 detections = Detector()
-controller = Controller(port='COM7', baud=9600)
+# controller = Controller(port='COM7', baud=9600)
+controller = FakeController()
+
 selectedOwner = False
-owner_lost_frames = 0
+ownerLostFrames = 0
 MAX_LOST_FRAMES = 10
 
 while cam.isRunning():
@@ -44,11 +49,11 @@ while cam.isRunning():
                 break
     #   stops the robot when the owner isnt detected.
         if not owner_found and selectedOwner:
-            owner_lost_frames += 1
-            if owner_lost_frames > MAX_LOST_FRAMES:
+            ownerLostFrames += 1
+            if ownerLostFrames > MAX_LOST_FRAMES:
                 controller.send_command("STOP")
         else:
-            owner_lost_frames = 0
+            ownerLostFrames = 0
 
         # cv.imshow("AI Follow Robot Vision", new_frame)
 
