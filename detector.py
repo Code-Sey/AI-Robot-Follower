@@ -8,7 +8,7 @@ class Detector():
         self.owner_id = None
 # Owner selection: whoever is closest to the center of the frame at the press of a buttion, then tracks that id
     def selectOwner(self, results, center):
-        if results[0].boxes:
+        
             closestToCenter = None
             min_d = float("inf")
             for box in results[0].boxes:
@@ -16,8 +16,7 @@ class Detector():
                     continue
                 x = box.xywh[0][0].item()
                 y = box.xywh[0][1].item()
-                objCenter = (x, y)
-                d = math.sqrt((objCenter[0] - center[0])**2 + (objCenter[1] - center[1])**2)
+                d = math.sqrt((x - center[0])**2 + (y - center[1])**2)
                 if d < min_d:
                     min_d = d
                     closestToCenter = box
