@@ -6,10 +6,10 @@ class Camera():
 
     def get_frame(self):
         isTrue, frame = self.capture.read()
+        if not isTrue:
+            return False,None, None
         height, width = frame.shape[:2]
-        halfHeight = height/2
-        halfWidth = width/2
-        centerFrame = (halfWidth, halfHeight)
+        centerFrame = (width/2, height/2)
         return isTrue, frame, centerFrame
 
     def isRunning(self):
